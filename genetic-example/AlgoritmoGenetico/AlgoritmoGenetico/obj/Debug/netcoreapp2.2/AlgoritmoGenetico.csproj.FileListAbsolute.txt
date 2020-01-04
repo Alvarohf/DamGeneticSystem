@@ -9,3 +9,13 @@ C:\Users\Cliri\source\repos\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcor
 C:\Users\Cliri\source\repos\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.AssemblyInfo.cs
 C:\Users\Cliri\source\repos\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.dll
 C:\Users\Cliri\source\repos\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.pdb
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\bin\Debug\netcoreapp2.2\AlgoritmoGenetico.deps.json
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\bin\Debug\netcoreapp2.2\AlgoritmoGenetico.runtimeconfig.json
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\bin\Debug\netcoreapp2.2\AlgoritmoGenetico.runtimeconfig.dev.json
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\bin\Debug\netcoreapp2.2\AlgoritmoGenetico.dll
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\bin\Debug\netcoreapp2.2\AlgoritmoGenetico.pdb
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.csprojAssemblyReference.cache
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.AssemblyInfoInputs.cache
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.AssemblyInfo.cs
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.dll
+C:\Users\josel\Desktop\Uni\Patrones\DamGeneticSystem\genetic-example\AlgoritmoGenetico\AlgoritmoGenetico\obj\Debug\netcoreapp2.2\AlgoritmoGenetico.pdb

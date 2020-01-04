@@ -32,20 +32,32 @@ namespace AlgoritmoGenetico
         public DNA mutarHijo()
         {
             Random rnd = new Random();
-            if (rnd.NextDouble() < 0.1)
+            Random coinflip = new Random();
+            if (rnd.NextDouble() < 0.1)//mutar en x
             {
-                if (rnd.NextDouble() < 0.1)
+                int flip = coinflip.Next(1, 3);
+                if (flip == 1)
                 {
                     this.X = X - rnd.Next(10);
-                    this.Y = Y - rnd.Next(10);
                 }
                 else
                 {
                     this.X = X + rnd.Next(10);
+                }
+            }
+            if (rnd.NextDouble() < 0.1)
+            {
+                int flip = coinflip.Next(1, 3);
+                if (flip == 1)
+                {
+                    this.Y = Y - rnd.Next(10);
+                }
+                else
+                {
                     this.Y = Y + rnd.Next(10);
                 }
-
             }
+
             return this;
 
         }
@@ -67,7 +79,7 @@ namespace AlgoritmoGenetico
         }
         public void Simulacion()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 CalcularFitness();
                 Seleccion();
