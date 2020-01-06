@@ -11,7 +11,7 @@ namespace AlgoritmoGenetico
             CreadorPoblacion creador = new CreadorPoblacion();
             PoblacionBuilder pE = new PoblacionEliteBuilder();
             PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
-            creador.SetPoblacionBuilder(pR);
+            creador.SetPoblacionBuilder(pE);
             creador.CrearPoblacion();
             p = creador.GetPoblacion();
             p.Simulacion();

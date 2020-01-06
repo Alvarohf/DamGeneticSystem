@@ -2,6 +2,7 @@ using System;
 
 public class DNA
 {
+    private IEstado estado;
     public DNA()
     {
         Random rnd = new Random();
@@ -52,32 +53,9 @@ public class DNA
 
     public DNA mutarHijo()
     {
-        Random rnd = new Random();
-        Random coinflip = new Random();
-        if (rnd.NextDouble() < 0.1)//mutar en x
-        {
-            int flip = coinflip.Next(1, 3);
-            if (flip == 1)
-            {
-                this.SetX(GetX() - rnd.Next(10));
-            }
-            else
-            {
-                this.SetX(GetX() + rnd.Next(10));
-            }
-        }
-        if (rnd.NextDouble() < 0.1)
-        {
-            int flip = coinflip.Next(1, 3);
-            if (flip == 1)
-            {
-                this.SetY(GetY() - rnd.Next(10));
-            }
-            else
-            {
-                this.SetY(GetY() + rnd.Next(10));
-            }
-        }
+        estado = new EstadoMutarLineal();
+
+        estado.actuar(this);
 
         return this;
 
