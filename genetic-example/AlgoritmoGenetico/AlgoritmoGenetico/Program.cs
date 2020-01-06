@@ -7,10 +7,10 @@ namespace AlgoritmoGenetico
     {
         static void Main(string[] args)
         {
-            DNA punto = new DNA();
-            Console.WriteLine(punto.X);
             IEstrategiaSeleccion est = new EstrategiaSeleccionElite();
-            Poblacion p = new Poblacion(est);
+            CalculadorFitnessLineal calc = new CalculadorFitnessLineal();
+            Decorator cE = new CalculadorFitnessExponencial(calc);
+            Poblacion p = new Poblacion(est, cE);
             p.Simulacion();
         }
     }

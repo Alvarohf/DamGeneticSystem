@@ -22,7 +22,7 @@ class EstrategiaSeleccionElite : IEstrategiaSeleccion
     // Compares by Length, Height, and Width.
     public override int Compare(DNA x, DNA y)
     {
-        return x.fitness.CompareTo(y.fitness);
+        return x.Getfitness().CompareTo(y.Getfitness());
 
     }
 

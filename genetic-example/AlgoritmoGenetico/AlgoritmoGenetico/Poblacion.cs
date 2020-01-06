@@ -7,12 +7,13 @@ class Poblacion
     private List<DNA> dnas = new List<DNA>();
     private int popLenght = 20;
     private List<DNA> seleccion = new List<DNA>();
-    public int[] target = { 3, 42 };  
-    public IEstrategiaSeleccion estrategiaSeleccion;
-    public Poblacion(IEstrategiaSeleccion seleccion)
+    private int[] target = { 3, 42 };
+    private IEstrategiaSeleccion estrategiaSeleccion;
+    private ICalculadorFitness calculadorFitness;
+    public Poblacion(IEstrategiaSeleccion seleccion, ICalculadorFitness calcFitness)
     {
         this.estrategiaSeleccion = seleccion;
-
+        this.calculadorFitness = calcFitness;
         for (int i = 0; i < popLenght; i++)
         {
             dnas.Add(new DNA());
@@ -30,7 +31,7 @@ class Poblacion
             int j = 0;
             foreach (DNA dna in dnas)
             {
-                Console.WriteLine($"Generacion: {i}, DNA: {j} X:{dna.X} Y:{dna.Y}");
+                Console.WriteLine($"Generacion: {i}, DNA: {j} X:{dna.GetX()} Y:{dna.GetY()}");
                 j++;
             }
         }
@@ -40,8 +41,8 @@ class Poblacion
         for (int i = 0; i < dnas.Count; i++)
         {
 
-            dnas[i].fitness = (double)1.0 / (Math.Abs(target[0] - dnas[i].X) + 1) + 1.0 / (Math.Abs(target[1] - dnas[i].Y) + 1);
-            Console.WriteLine($"Fitness: {dnas[i].fitness}");
+            dnas[i].Setfitness(this.calculadorFitness.CalcularFitness(dnas[i]));
+            Console.WriteLine($"Fitness: {dnas[i].Getfitness()}");
         }
     }
 
@@ -62,7 +63,7 @@ class Poblacion
     }
     public DNA generarHijo(DNA padre, DNA madre)
     {
-        return new DNA(padre.X, madre.Y);
+        return new DNA(padre.GetX(), madre.GetY());
     }
 
 }

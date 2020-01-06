@@ -3,10 +3,8 @@
     "",
     "\\genetic-example",
     "\\genetic-example\\AlgoritmoGenetico",
-    "\\genetic-example\\AlgoritmoGenetico\\AlgoritmoGenetico",
-    "\\genetic-example\\AlgoritmoGenetico\\AlgoritmoGenetico\\bin",
-    "\\genetic-example\\AlgoritmoGenetico\\AlgoritmoGenetico\\obj"
+    "\\genetic-example\\AlgoritmoGenetico\\AlgoritmoGenetico"
   ],
-  "SelectedNode": "\\genetic-example\\AlgoritmoGenetico\\AlgoritmoGenetico\\Program.cs",
+  "SelectedNode": "\\genetic-example\\AlgoritmoGenetico\\AlgoritmoGenetico.sln",
   "PreviewInSolutionExplorer": false
 }

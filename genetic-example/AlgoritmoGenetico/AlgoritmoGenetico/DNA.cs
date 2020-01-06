@@ -5,17 +5,51 @@ public class DNA
     public DNA()
     {
         Random rnd = new Random();
-        X = rnd.Next(200);
-        Y = rnd.Next(200);
+        SetX(rnd.Next(200));
+        SetY(rnd.Next(200));
     }
     public DNA(int X, int Y)
     {
-        this.X = X;
-        this.Y = Y;
+        this.SetX(X);
+        this.SetY(Y);
     }
-    public int X { get; set; }
-    public int Y { get; set; }
-    public double fitness { get; set; } = 0;
+
+    private int x;
+
+    public int GetX()
+    {
+        return x;
+    }
+
+    public void SetX(int value)
+    {
+        x = value;
+    }
+
+    private int y;
+
+    public int GetY()
+    {
+        return y;
+    }
+
+    public void SetY(int value)
+    {
+        y = value;
+    }
+
+    private double fitness = 0;
+
+    public double Getfitness()
+    {
+        return fitness;
+    }
+
+    public void Setfitness(double value)
+    {
+        fitness = value;
+    }
+
     public DNA mutarHijo()
     {
         Random rnd = new Random();
@@ -25,11 +59,11 @@ public class DNA
             int flip = coinflip.Next(1, 3);
             if (flip == 1)
             {
-                this.X = X - rnd.Next(10);
+                this.SetX(GetX() - rnd.Next(10));
             }
             else
             {
-                this.X = X + rnd.Next(10);
+                this.SetX(GetX() + rnd.Next(10));
             }
         }
         if (rnd.NextDouble() < 0.1)
@@ -37,11 +71,11 @@ public class DNA
             int flip = coinflip.Next(1, 3);
             if (flip == 1)
             {
-                this.Y = Y - rnd.Next(10);
+                this.SetY(GetY() - rnd.Next(10));
             }
             else
             {
-                this.Y = Y + rnd.Next(10);
+                this.SetY(GetY() + rnd.Next(10));
             }
         }
 

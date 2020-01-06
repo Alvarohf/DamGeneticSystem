@@ -8,14 +8,14 @@ class EstrategiaSeleccionRuedaRuleta : IEstrategiaSeleccion
     {
         double maxFit = 0;
         for (int i = 0; i < poblacion.Count; i++) { 
-            if (poblacion[i].fitness > maxFit)
+            if (poblacion[i].Getfitness() > maxFit)
             {
-                maxFit = poblacion[i].fitness;
+                maxFit = poblacion[i].Getfitness();
             }
         }
         for (int i = 0; i < poblacion.Count; i++)
         {
-            double n = Math.Round(poblacion[i].fitness / maxFit * 1000);
+            double n = Math.Round(poblacion[i].Getfitness() / maxFit * 10000);
             for (int j = 0; j < n; j++)
             {
                 seleccion.Add(poblacion[i]);
