@@ -7,10 +7,13 @@ namespace AlgoritmoGenetico
     {
         static void Main(string[] args)
         {
-            IEstrategiaSeleccion est = new EstrategiaSeleccionElite();
-            CalculadorFitnessLineal calc = new CalculadorFitnessLineal();
-            Decorator cE = new CalculadorFitnessExponencial(calc);
-            Poblacion p = new Poblacion(est, cE);
+            Poblacion p;
+            CreadorPoblacion creador = new CreadorPoblacion();
+            PoblacionBuilder pE = new PoblacionEliteBuilder();
+            PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
+            creador.SetPoblacionBuilder(pR);
+            creador.CrearPoblacion();
+            p = creador.GetPoblacion();
             p.Simulacion();
         }
     }

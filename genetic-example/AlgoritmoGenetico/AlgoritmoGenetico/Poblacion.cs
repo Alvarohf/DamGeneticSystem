@@ -10,10 +10,29 @@ class Poblacion
     private int[] target = { 3, 42 };
     private IEstrategiaSeleccion estrategiaSeleccion;
     private ICalculadorFitness calculadorFitness;
-    public Poblacion(IEstrategiaSeleccion seleccion, ICalculadorFitness calcFitness)
+
+    public IEstrategiaSeleccion GetIEstrategiaSeleccion()
     {
-        this.estrategiaSeleccion = seleccion;
-        this.calculadorFitness = calcFitness;
+        return this.estrategiaSeleccion;
+    }
+
+    public void SetIEstrategiaSeleccion(IEstrategiaSeleccion value)
+    {
+        estrategiaSeleccion = value;
+    }
+
+    public ICalculadorFitness GetICalculadorFitness()
+    {
+        return this.calculadorFitness;
+    }
+
+    public void SetICalculadorFitness(ICalculadorFitness value)
+    {
+        calculadorFitness = value;
+    }
+
+    public Poblacion()
+    {
         for (int i = 0; i < popLenght; i++)
         {
             dnas.Add(new DNA());
