@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using GeneticDams.BLL;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{Pattern pat = new Pattern();}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    ViewData["Title"] = "Manage";
+    var user = new UserHandler();
+    var spec = new SpecialistHandler();
+    var admin = new AdminHandler();
+    // Chain created
+    admin.SetNext(spec).SetNext(user);
+    string role = ClientHandler.Use(admin, User.Identity.Name);
+
+    <h1>Hello @User.Identity.Name!</h1>
+    <h2>Role: @role</h2>
+    if (role == "Specialist")
+    {
+        <p>You can configure the map options</p>
+    }
+    else if (role == "Admin")
+    {
+        <p>You can configure the map options and system options</p>
+    }
+    else
+    {
+        <p>@pat.Result</p>
+        <p>You can't configure the system or model, try to log with your specialist or admin account</p>
+    }
+}
+else
+{
+    <h1 class="text-danger">Error<i class="fas fa-times"></i></h1>
+    <h2>You have to login first, to manage your configuration</h2>
+}

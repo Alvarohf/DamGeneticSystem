@@ -1,0 +1,236 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using GeneticDams.BLL;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Genetic Dam System";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Genetic Dam System <i class="fas fa-dna"></i></h1>
+    <p>This project finds the best spot in a topographic map to put a dam with genetic algorithms</p>
+</div>
+<input type="button" class="btn btn-primary mb-3" value="Click to Display Map" onclick="displayGoogleMap()" />
+<div id="myDiv" style="width:100%;height:400px;"></div>
+<p id="info-box"></p>
+<div class="container">
+    <div class="row">
+        <input type="button" id="sendButton" value="Start Algorithm" />
+    </div>
+</div>
+@{
+    //ConcreteAggregate a = new ConcreteAggregate();
+    MapAggregate maps = new MapAggregate();
+    maps[0] = new Map(true, 1, 100, "maps/map.json");
+    maps[1] = new Map(true, 1, 100, "maps/map10m.json");
+    maps[2] = new Map(true, 1, 100, "maps/map25m.json");
+    maps[3] = new Map(true, 1, 100, "maps/map25m2.json");
+    Iterator mapIterator = maps.CreateIterator();
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <nav>
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" onclick="nextMap()">Previous</a></li>
+            <li class="page-item"><a class="page-link" onclick="nextMap()">Next</a></li>
+        </ul>
+    </nav>
+}
+else
+{
+    <p class="text-warning">Login to run more maps</p>
+}
+@section Scripts {
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js" integrity="sha256-m0QmIsBXcOMiETRmpT3qg2IQ/i0qazJA2miCHzOmS1Y=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js" integrity="sha256-V9GWip6STrPGZ47Fl52caWO8LhKidMGdFvZbjFUlRFs=" crossorigin="anonymous"></script>
+<script>
+        function nextMap(page) {
+
+            displayGoogleMap();
+        }
+        var MapBounds;
+        var map;
+        function displayGoogleMap() {
+            // Init map
+            map = new google.maps.Map(document.getElementById('myDiv'), {
+                zoom: 6,
+                center: { lat: 40.687, lng: -1.996 }
+            });
+            // Set initial bounds
+            bounds = new google.maps.LatLngBounds();
+            // Load icons of the markers
+            var icons = {
+                dam: {
+                    icon: "/res/dam_red.png"
+                },
+                good: {
+                    icon: "/res/good-spot.png"
+                }
+            };
+
+
+            // Load GeoJSON
+            mapJson(map)
+            // Custom the map colors
+            map.data.setStyle(function (feature) {
+                var color = feature.getProperty('stroke');
+                return {
+                    clickable: true,
+                    fillColor: color,
+                    strokeWeight: 1
+                }
+            });
+
+            // Point of the marker
+            var point = {
+                position: new google.maps.LatLng(40.687, -1.996),
+                type: 'dam'
+            };
+            // Display the marker
+            marker = placeMarker(point.position, icons, point.type);
+
+
+            // Center map in the middle
+            map.data.addListener('addfeature', function (e) {
+                processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+                MapBounds = bounds;
+                console.log(bounds)
+                map.setCenter(bounds.getCenter());
+                map.fitBounds(bounds);
+                changeMarkerPosition(marker, map.center);
+            });
+            map.fitBounds(bounds);
+            map.panToBounds(bounds);
+
+            // Get data from the layers
+            map.data.addListener('mouseover', function (event) {
+                document.getElementById('info-box').textContent =
+                    event.feature.getProperty('elevation')+event.latLng;
+            });
+
+            // Change marker position
+            map.data.addListener('click', function (event) {
+                changeMarkerPosition(marker, event.latLng);
+                floodMap(map,event.feature.getProperty('elevation'));
+            });
+
+        }
+
+        // Reset map colours
+        function restartMap(map) {
+            map.data.setStyle(function (feature) {
+                var color = feature.getProperty('stroke');
+                return {
+                    clickable: true,
+                    fillColor: color,
+                    strokeWeight: 1
+                }
+            });
+        }
+        // Add water layer
+        function floodMap(map, elevation) {
+            restartMap(map);
+            map.data.setStyle(function (feature) {
+                var color = feature.getProperty('stroke');
+                var polygon = feature.getGeometry();
+                var area = google.maps.geometry.spherical.computeArea(polygon);
+                console.log(area);
+                if (feature.getProperty("elevation") <= parseInt(elevation)) {
+                    color = "#08006C";
+                }
+                return {
+                    clickable: true,
+                    fillColor: color,
+                    strokeWeight: 1
+                }
+            });
+        }
+        // Process the points to center the map
+            function processPoints(geometry, callback, thisArg) {
+            if (geometry instanceof google.maps.LatLng) {
+                callback.call(thisArg, geometry);
+            } else if (geometry instanceof google.maps.Data.Point) {
+                callback.call(thisArg, geometry.get());
+            } else {
+                geometry.getArray().forEach(function (g) {
+                    processPoints(g, callback, thisArg);
+                });
+            }
+        }
+        // Load GeoJson Map and calculate area
+        function mapJson(map) {
+              map.data.loadGeoJson(
+            "@mapIterator.CurrentItem.MapString", {},
+            function(features) {
+              map.data.forEach(function(feature) {
+                if (feature.getGeometry().getType() == "Polygon") {
+                  var bounds = [];
+                  var polyBnds = new google.maps.LatLngBounds();
+
+                  feature.getGeometry().forEachLatLng(function(path) {
+                    bounds.push(path);
+                    polyBnds.extend(path);
+                  });
+                  var area = google.maps.geometry.spherical.computeArea(bounds);
+                    console.log("area:"+area);
+
+                  var iW = new google.maps.InfoWindow({
+                    content: Math.round(area,2) + " sq meters",
+                    position: polyBnds.getCenter()
+                  });
+                  iW.open(map);
+                }
+              });
+
+    });
+        }
+        // Set a marker in the map
+        function placeMarker(location, icons, typeIcon) {
+            return new google.maps.Marker({
+                position: location,
+                icon: icons[typeIcon].icon,
+                map: map
+            });
+        }
+        // Update marker in the map
+        function changeMarkerPosition(marker, location) {
+            marker.setPosition(location);
+        }
+
+        // Connect to signalR to share data
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        //Disable send button until connection is established
+        document.getElementById("sendButton").disabled = true;
+
+        // Receive data from the server
+        connection.on("ReceiveMessage", function (typeMessage, message) {
+            var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            console.log(msg)
+        });
+
+        // Start connection on click
+        connection.start().then(function () {
+            document.getElementById("sendButton").disabled = false;
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+
+        // Send data to the server
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            var typeMessage = "init";
+            var message = MapBounds.toString();
+            connection.invoke("SendMessage", typeMessage, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+
+    </script>
+
+}
