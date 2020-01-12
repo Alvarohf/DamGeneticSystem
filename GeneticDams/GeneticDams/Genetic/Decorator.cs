@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GeneticLibrary
 {
     public class Decorator : ICalculadorFitness
@@ -9,7 +11,7 @@ namespace GeneticLibrary
             this.calculadorFitnessLineal = calculadorFitnessLineal;
         }
 
-        public double CalcularFitness(DNA dna)
+        public double[] CalcularFitness(List<DNA> dna)
         {
             return calculadorFitnessLineal.CalcularFitness(dna);
         }

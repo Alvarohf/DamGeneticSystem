@@ -4,6 +4,7 @@ using GoogleMapsApi.Entities.Elevation.Request;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using System.Linq;
+using GoogleMapsApi;
 
 namespace GeneticDams.BLL
 {
@@ -19,18 +20,19 @@ namespace GeneticDams.BLL
             creador.SetPoblacionBuilder(pE);
             creador.CrearPoblacion();
             p = creador.GetPoblacion();
-            Result = Elevation_ReturnsCorrectElevation();
+            p.Simulacion(5);
+            Result = p.Simulacion(5);
         }
         public string Elevation_ReturnsCorrectElevation()
         {
             var request = new ElevationRequest
             {
                 ApiKey = "AIzaSyAtuFD6vSzYrVkEoxvlkztgwJLWRKUkzq0",
-                Locations = new[] { new Location(41.0683315, -3.34627) }
+                Locations = new[] { new Location(41.0683315, -3.34627), new Location(41.0683315, -3.34627) , new Location(41.0683315, -3.34627)}
             };
 
-           // var result = GoogleMaps.Elevation.Query(request);
-            return "result.Results.First().Elevation.ToString()";
+           var result = GoogleMaps.Elevation.Query(request);
+            return result.Results.First().Elevation.ToString();
         }
     }
 

@@ -7,35 +7,35 @@ namespace GeneticLibrary
         public DNA()
         {
             Random rnd = new Random();
-            SetX(rnd.Next(200));
-            SetY(rnd.Next(200));
+            SetX(rnd.Next(60));
+            SetY(rnd.Next(60));
         }
-        public DNA(int X, int Y)
+        public DNA(double X, double Y)
         {
             this.SetX(X);
             this.SetY(Y);
         }
 
-        private int x;
+        private double x;
 
-        public int GetX()
+        public double GetX()
         {
             return x;
         }
 
-        public void SetX(int value)
+        public void SetX(double value)
         {
             x = value;
         }
 
-        private int y;
+        private double y;
 
-        public int GetY()
+        public double GetY()
         {
             return y;
         }
 
-        public void SetY(int value)
+        public void SetY(double value)
         {
             y = value;
         }

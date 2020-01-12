@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 namespace GeneticLibrary
 {
     public class CalculadorFitnessExponencial : Decorator
@@ -9,10 +11,19 @@ namespace GeneticLibrary
 
         }
 
-        public new double CalcularFitness(DNA dna)
+        public double[] CalcularFitness(List<DNA> dna)
         {
             //base es como super en  c#
-            return Math.Pow(base.CalcularFitness(dna), 2);
+            return squareArray(base.CalcularFitness(dna));
+        }
+        public double[] squareArray(double[] array)
+        {
+            double[] resultado = new double[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                resultado[i] = Math.Pow(array[i], 2);
+            }
+            return resultado;
         }
     }
 }

@@ -13,11 +13,11 @@ namespace GeneticLibrary
                     int flip = coinflip.Next(1, 3);
                     if (flip == 1)
                     {
-                        dna.SetX(dna.GetX() - rnd.Next(10));
+                        dna.SetX(dna.GetX() - rnd.NextDouble()*10);
                     }
                     else
                     {
-                        dna.SetX(dna.GetX() + rnd.Next(10));
+                        dna.SetX(dna.GetX() + rnd.NextDouble() * 10);
                     }
                 }
                 if (rnd.NextDouble() < 0.1)
@@ -25,11 +25,11 @@ namespace GeneticLibrary
                     int flip = coinflip.Next(1, 3);
                     if (flip == 1)
                     {
-                        dna.SetY(dna.GetY() - rnd.Next(10));
+                        dna.SetY(dna.GetY() - rnd.NextDouble() * 10);
                     }
                     else
                     {
-                        dna.SetY(dna.GetY() + rnd.Next(10));
+                        dna.SetY(dna.GetY() + rnd.NextDouble() * 10);
                     }
                 }
 
