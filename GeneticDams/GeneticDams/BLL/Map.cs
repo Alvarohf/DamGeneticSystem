@@ -12,7 +12,6 @@ namespace GeneticDams.BLL
         public string MapString;
         // Feet = false meters = true
         public bool Measure { get; set; }
-
         public int Step { get; set; }
         // Array of colours
         public int ColourCollection { get; }
@@ -24,9 +23,8 @@ namespace GeneticDams.BLL
             this.ColourCollection = p_colourCollection;
             this.MapString = p_map;
         }
-        public string getMapString()
+        public string GetMapString()
         {
-
             return MapString;
         }
     }

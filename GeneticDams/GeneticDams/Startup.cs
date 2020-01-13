@@ -9,6 +9,8 @@ using GeneticDams.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GeneticDams.BLL.SignalRChat.Hubs;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace GeneticDams
 {
@@ -30,7 +32,9 @@ namespace GeneticDams
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

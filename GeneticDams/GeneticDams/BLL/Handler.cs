@@ -5,7 +5,7 @@ using System;
 namespace GeneticDams.BLL
 {
     /// <summary>
-    /// 
+    /// Abstract handler to implement
     /// </summary>
     public abstract class AbstractHandler
     {
