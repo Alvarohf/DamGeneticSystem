@@ -15,11 +15,6 @@
 <input type="button" class="btn btn-primary mb-3" value="Click to Display Map" onclick="startMap('maps/map.json','map_1')" />
 <div id="myDiv" style="width:100%;height:400px;"></div>
 <p id="info-box"></p>
-<div class="container">
-    <div class="row">
-        <input type="button" id="sendButton" value="Start Algorithm" />
-    </div>
-</div>
 @{
     //ConcreteAggregate a = new ConcreteAggregate();
     MapAggregate maps = new MapAggregate();
@@ -40,15 +35,16 @@
         </ul>
     </nav>
     }
-        @if (SignInManager.IsSignedIn(User))
-        {
-
-        
-    }
-    else
-    {
-        <p class="text-warning">Login to run more maps</p>
-    }
+<div class="container">
+    <div class="row">
+        <input type="button" id="sendButton" class="btn btn-success mb-3" value="Start Algorithm" />
+        <fieldset disabled class="col-md-10">
+            <div class="form-group ml-3">
+                <input type="text" id="result" class="form-control" placeholder="Result">
+            </div>
+        </fieldset>
+    </div>
+</div>
         @section Scripts {
             <script src="~/lib/signalr/dist/browser/signalr.js"></script>
             <script>
@@ -222,7 +218,9 @@
         // Receive data from the server
         connection.on("ReceiveMessage", function (typeMessage, message) {
             var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            document.getElementById("result").value = message;
             console.log(msg)
+
         });
 
         // Start connection on click
@@ -236,10 +234,16 @@
         // Send data to the server
         document.getElementById("sendButton").addEventListener("click", function (event) {
             var typeMessage = "init";
-            var message = MapBounds.toString();
-            connection.invoke("SendMessage", typeMessage, message).catch(function (err) {
-                return console.error(err.toString());
-            });
+            if (MapBounds !== undefined) {
+                document.getElementById("result").classList.remove("text-danger");
+                var message = MapBounds.toString();
+                connection.invoke("SendMessage", typeMessage, message).catch(function (err) {
+                    return console.error(err.toString());
+                });
+            } else {
+                 document.getElementById("result").classList.add("text-danger");
+                 document.getElementById("result").value = "You need to load the map first";
+            }
             event.preventDefault();
         });
 

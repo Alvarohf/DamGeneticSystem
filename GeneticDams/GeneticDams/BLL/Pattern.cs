@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using System.Linq;
 using GoogleMapsApi;
+using System.Collections.Generic;
+using System;
 
 namespace GeneticDams.BLL
 {
@@ -22,6 +24,21 @@ namespace GeneticDams.BLL
             p = creador.GetPoblacion();
             p.Simulacion(5);
             Result = p.Simulacion(5);
+        }
+        public Pattern(List<Double> limites)
+        {
+            //Poblacion p;
+            //CreadorPoblacion creador = new CreadorPoblacion();
+            //PoblacionBuilder pE = new PoblacionEliteBuilder();
+            //PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
+            //creador.SetPoblacionBuilder(pE);
+            //creador.CrearPoblacion();
+            //p = creador.GetPoblacion();
+            //p.Simulacion(5);
+            foreach (Double coordenada in limites)
+            {
+                Result += coordenada.ToString();
+            }
         }
         public string Elevation_ReturnsCorrectElevation()
         {
@@ -42,9 +59,13 @@ namespace SignalRChat.Hubs
         {
             public async Task SendMessage(string typeMessage, string message)
             {
+
+               List<double> limites = message.Replace("(", "").Replace(")", "").Split(",").Select(Double.Parse).ToList();
+                Pattern genetic = new Pattern(limites);
                 if (typeMessage=="init")
                 {
-                    await Clients.All.SendAsync("ReceiveMessage", "start", message);
+                    await Clients.All.SendAsync("ReceiveMessage", "start",
+                       genetic.Result);
                 } else if(typeMessage == "elev") {
                     await Clients.All.SendAsync("ReceiveMessage", "finish", "Finishing ...");
                 }
