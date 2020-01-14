@@ -1,3 +1,4 @@
+using GoogleMapsApi.Entities.Common;
 using System;
 using System.Collections.Generic;
 namespace GeneticLibrary
@@ -25,8 +26,6 @@ namespace GeneticLibrary
             for (int i = 0; i < popLenght; i++)
             {
                 dnas.Add(new DNA(minLat, minLng, maxLat, maxLng));
-                    System.Diagnostics.Debug.WriteLine(dnas[i].GetY());
-                System.Diagnostics.Debug.WriteLine(dnas[i].GetX());
             }
             Console.WriteLine(dnas.Count + "estoy aqui");
         }
@@ -51,9 +50,9 @@ namespace GeneticLibrary
             calculadorFitness = value;
         }
 
-        public string Simulacion(int iteraciones)
+        public Location[] Simulacion(int iteraciones)
         {
-
+            Location[] localizaciones = new Location[dnas.Count];
             for (int i = 0; i < iteraciones; i++)
             {
                 CalcularFitness();
@@ -67,7 +66,11 @@ namespace GeneticLibrary
                 }
 
             }
-            return $"Generacion: {dnas[1].GetX()} {dnas[1].GetY()}";
+            for ( int i = 0; i<dnas.Count; i++)
+            {
+                localizaciones[i] = new Location(dnas[i].GetX(),dnas[i].GetY());
+            }
+            return localizaciones;
         }
         public void CalcularFitness()
         {

@@ -75,6 +75,8 @@
         }
         var MapBounds;
         var map;
+        var mainMarker;
+        var markers;
         function startMap(name, li_id) {
             // We remove active button
             var elements = document.getElementById("mapNav").getElementsByTagName("li");
@@ -123,7 +125,7 @@
                 type: 'dam'
             };
             // Display the marker
-            marker = placeMarker(point.position, icons, point.type);
+            mainMarker = placeMarker(point.position, icons, point.type);
 
 
             // Center map in the middle
@@ -132,7 +134,7 @@
                 MapBounds = bounds;
                 map.setCenter(bounds.getCenter());
                 map.fitBounds(bounds);
-                changeMarkerPosition(marker, map.center);
+                changeMarkerPosition(mainMarker, map.center);
             });
             map.fitBounds(bounds);
             map.panToBounds(bounds);
@@ -145,7 +147,7 @@
 
             // Change marker position
             map.data.addListener('click', function (event) {
-                changeMarkerPosition(marker, event.latLng);
+                changeMarkerPosition(mainMarker, event.latLng);
                 floodMap(map, event.feature.getProperty('elevation'));
             });
 
@@ -240,11 +242,13 @@
         document.getElementById("sendButton").disabled = true;
 
         // Receive data from the server
-        connection.on("ReceiveMessage", function (typeMessage, message) {
+        connection.on("ReceiveMessage", function (locations, message) {
             var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             document.getElementById("result").value = message;
-            console.log(msg)
 
+            changeMarkerPosition(mainMarker,locations[0]);
+            console.log(message)
+            console.log(locations[0])
         });
 
         // Start connection on click

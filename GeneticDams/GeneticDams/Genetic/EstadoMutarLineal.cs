@@ -41,13 +41,10 @@ namespace GeneticLibrary
                     if (flip == 1)
                     {
                         dna.SetY(Math.Max(dna.GetY() - rnd.NextDouble() * limiteLng,minLng));
-                        System.Diagnostics.Debug.WriteLine(dna.GetY());
                     }
                     else
                     {
                         dna.SetY(Math.Min(dna.GetY() + rnd.NextDouble() * limiteLng,maxLng));
-
-                        System.Diagnostics.Debug.WriteLine(dna.GetY());
                     }
                 }
 
