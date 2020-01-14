@@ -21,8 +21,8 @@ namespace GeneticLibrary
             {
                 Random rnd = new Random();
                 Random coinflip = new Random();
-                double limiteLat =maxLat-minLat/20;
-                double limiteLng = maxLng - minLng /20;
+                double limiteLat =Math.Abs(maxLat-minLat/20);
+                double limiteLng = Math.Abs(maxLng - minLng /20);
                 if (rnd.NextDouble() < 0.1)//mutar en x
                 {
                     int flip = coinflip.Next(1, 3);
@@ -41,10 +41,13 @@ namespace GeneticLibrary
                     if (flip == 1)
                     {
                         dna.SetY(Math.Max(dna.GetY() - rnd.NextDouble() * limiteLng,minLng));
+                        System.Diagnostics.Debug.WriteLine(dna.GetY());
                     }
                     else
                     {
                         dna.SetY(Math.Min(dna.GetY() + rnd.NextDouble() * limiteLng,maxLng));
+
+                        System.Diagnostics.Debug.WriteLine(dna.GetY());
                     }
                 }
 

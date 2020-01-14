@@ -17,15 +17,14 @@ namespace GeneticDams.BLL
         public Pattern(List<Double> limites)
         {
             Poblacion p;
-            CreadorPoblacion creador = new CreadorPoblacion(limites[0], limites[1], limites[2], limites[3]);
+            CreadorPoblacion creador = new CreadorPoblacion(40.6874070521213, -2.44102478027344, 40.867314583648, -1.99607849121094);
             PoblacionBuilder pE = new PoblacionEliteBuilder();
             // ROLLO MENU
             PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
             creador.SetPoblacionBuilder(pE);
             creador.CrearPoblacion();
             p = creador.GetPoblacion();
-            System.Diagnostics.Debug.WriteLine(p.Simulacion(1));
-            Result = "AAA";
+            Result=(p.Simulacion(5));
         }
     }
 

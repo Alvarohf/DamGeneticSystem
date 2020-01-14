@@ -15,8 +15,7 @@ namespace GeneticLibrary
             double[] alturas = new double[dna.Count];
             for (int i = 0; i < dna.Count; i++)
             {
-                System.Diagnostics.Debug.WriteLine(dna[i].GetX());
-                System.Diagnostics.Debug.WriteLine(dna[i].GetY());
+
                 locations[i] = new Location(dna[i].GetX(),dna[i].GetY());
             }
             var elevaciones = Elevation_ReturnsCorrectElevation(locations);

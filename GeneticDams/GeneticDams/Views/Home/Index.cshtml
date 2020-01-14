@@ -130,14 +130,13 @@
             map.data.addListener('addfeature', function (e) {
                 processPoints(e.feature.getGeometry(), bounds.extend, bounds);
                 MapBounds = bounds;
-                console.log(bounds)
                 map.setCenter(bounds.getCenter());
                 map.fitBounds(bounds);
                 changeMarkerPosition(marker, map.center);
             });
             map.fitBounds(bounds);
             map.panToBounds(bounds);
-
+            console.log(bounds)
             // Get data from the layers
             map.data.addListener('mouseover', function (event) {
                 document.getElementById('info-box').textContent =
@@ -259,6 +258,7 @@
         // Send data to the server
         document.getElementById("sendButton").addEventListener("click", function (event) {
             var typeMessage = "init";
+            console.log(MapBounds)
             if (MapBounds !== undefined) {
                 document.getElementById("result").classList.remove("text-danger");
                 var message = MapBounds.toString();

@@ -15,8 +15,8 @@ namespace GeneticLibrary
         {
             Random rnd = new Random();
 
-            x=(minLat+rnd.NextDouble()*maxLat);
-            y = (minLng + rnd.NextDouble() * maxLng);
+            x=(minLat+rnd.NextDouble()*(maxLat-minLat));
+            y = (minLng + rnd.NextDouble() * (maxLng-minLng));
         }
 
         public double GetX()

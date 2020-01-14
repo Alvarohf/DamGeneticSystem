@@ -25,7 +25,8 @@ namespace GeneticLibrary
             for (int i = 0; i < popLenght; i++)
             {
                 dnas.Add(new DNA(minLat, minLng, maxLat, maxLng));
-
+                    System.Diagnostics.Debug.WriteLine(dnas[i].GetY());
+                System.Diagnostics.Debug.WriteLine(dnas[i].GetX());
             }
             Console.WriteLine(dnas.Count + "estoy aqui");
         }
