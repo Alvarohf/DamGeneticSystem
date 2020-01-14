@@ -13,7 +13,8 @@ namespace GeneticLibrary
         private readonly double minLng;
         private readonly double maxLat;
         private readonly double maxLng;
-
+        private DNA bestDNA;
+        private bool max=false;
 
         public Poblacion(double minLat, double minLng, double maxLat, double maxLng)
         {
@@ -60,14 +61,19 @@ namespace GeneticLibrary
                 Seleccion();
                 GenerarPoblacion();
                 int j = 0;
+                bestDNA = dnas[0];
                 foreach (DNA dna in dnas)
                 {
                     Console.WriteLine($"Generacion: {i}, DNA: {j} X:{dna.GetX()} Y:{dna.GetY()}");
                     j++;
+                    if (comparar(bestDNA.Getfitness(), dna.Getfitness()))
+                    {
+                        bestDNA = dna;
+                    }
                 }
 
             }
-            return $"Generacion: {dnas[1].GetX()} {dnas[1].GetY()}";
+            return $"Generacion: {bestDNA.GetX()} {bestDNA.GetY()}";
         }
         public void CalcularFitness()
         {
@@ -83,8 +89,7 @@ namespace GeneticLibrary
 
         public void Seleccion()
         {
-            estrategiaSeleccion.Seleccion(this.dnas, this.seleccion);
-
+            estrategiaSeleccion.Seleccion(this.dnas, this.seleccion, this.max);
         }
         public void GenerarPoblacion()
         {
@@ -100,7 +105,7 @@ namespace GeneticLibrary
 
             for (int i = 0; i < dnas.Count; i++)
             {
-                if (fitnesses[i]>dnas[i].Getfitness())
+                if (comparar(fitnesses[i], dnas[i].Getfitness()))
                 {
                     dnas[i] = hijos[i];
                 }
@@ -115,6 +120,19 @@ namespace GeneticLibrary
             return hijo;
         }
 
+        public bool comparar(double x, double y)
+        {
+            bool mejor;
+            if (max)
+            {
+                mejor = x > y;
+            }
+            else
+            {
+                mejor = x < y;
+            }
+            return mejor;
+        }
     }
 }
 
