@@ -3,7 +3,6 @@
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@{Pattern pat = new Pattern();}
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -27,7 +26,6 @@
     }
     else
     {
-        <p>@pat.Result</p>
         <p>You can't configure the system or model, try to log with your specialist or admin account</p>
     }
 }

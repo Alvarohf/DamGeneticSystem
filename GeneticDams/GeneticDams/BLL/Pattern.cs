@@ -13,43 +13,19 @@ namespace GeneticDams.BLL
     public class Pattern
     {
         public string Result { get; set; }
-        public Pattern()
+
+        public Pattern(List<Double> limites)
         {
             Poblacion p;
-            CreadorPoblacion creador = new CreadorPoblacion();
+            CreadorPoblacion creador = new CreadorPoblacion(limites[0], limites[1], limites[2], limites[3]);
             PoblacionBuilder pE = new PoblacionEliteBuilder();
+            // ROLLO MENU
             PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
             creador.SetPoblacionBuilder(pE);
             creador.CrearPoblacion();
             p = creador.GetPoblacion();
-            p.Simulacion(5);
-            Result = p.Simulacion(5);
-        }
-        public Pattern(List<Double> limites)
-        {
-            //Poblacion p;
-            //CreadorPoblacion creador = new CreadorPoblacion();
-            //PoblacionBuilder pE = new PoblacionEliteBuilder();
-            //PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
-            //creador.SetPoblacionBuilder(pE);
-            //creador.CrearPoblacion();
-            //p = creador.GetPoblacion();
-            //p.Simulacion(5);
-            foreach (Double coordenada in limites)
-            {
-                Result += coordenada.ToString();
-            }
-        }
-        public string Elevation_ReturnsCorrectElevation()
-        {
-            var request = new ElevationRequest
-            {
-                ApiKey = "AIzaSyAtuFD6vSzYrVkEoxvlkztgwJLWRKUkzq0",
-                Locations = new[] { new Location(41.0683315, -3.34627), new Location(41.0683315, -3.34627) , new Location(41.0683315, -3.34627)}
-            };
-
-           var result = GoogleMaps.Elevation.Query(request);
-            return result.Results.First().Elevation.ToString();
+            System.Diagnostics.Debug.WriteLine(p.Simulacion(1));
+            Result = "AAA";
         }
     }
 

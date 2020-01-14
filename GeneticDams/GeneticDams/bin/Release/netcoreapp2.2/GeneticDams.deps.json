@@ -24,15 +24,42 @@
     ".NETCoreApp,Version=v2.2": {
       "GeneticDams/1.0.0": {
         "dependencies": {
+          "GoogleMapsApi": "0.80.0",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
-          "Microsoft.NETCore.App": "2.2.0"
+          "Microsoft.NETCore.App": "2.2.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.0"
         },
         "runtime": {
           "GeneticDams.dll": {}
         },
         "compile": {
           "GeneticDams.dll": {}
+        }
+      },
+      "GoogleMapsApi/0.80.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/net40/GoogleMapsApi.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.41.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/GoogleMapsApi.dll": {}
+        }
+      },
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design/3.1.0": {
+        "runtime": {
+          "lib/net461/dotnet-aspnet-codegenerator-design.exe": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.100.19.57003"
+          }
+        },
+        "compile": {
+          "lib/net461/dotnet-aspnet-codegenerator-design.exe": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3236,6 +3263,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "GoogleMapsApi/0.80.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7NLUWu0ftxbkhUiUwvgfiFkT/2uMh1cYxPk2U+ZSzHIuEKK/WM4T+nUNBYNTMXV02y3S1DfOQess0iLUEd4tug==",
+      "path": "googlemapsapi/0.80.0",
+      "hashPath": "googlemapsapi.0.80.0.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.Web.CodeGeneration.Design/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZHXVe8nDkHXmPlBNGOl3SIxoUKfah2OJOKKmq769gBMqHJMaOrFKhPYsHdTORjKUtwc3AlO1CMLgnljFyyxA/Q==",
+      "path": "microsoft.visualstudio.web.codegeneration.design/3.1.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.design.3.1.0.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",

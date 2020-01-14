@@ -3,20 +3,21 @@ namespace GeneticLibrary
 {
     public class DNA
     {
+        private double x;
+        private double y;
+        private double fitness = 0;
         private IEstado estado;
+
         public DNA()
         {
-            Random rnd = new Random();
-            SetX(rnd.Next(60));
-            SetY(rnd.Next(60));
         }
-        public DNA(double X, double Y)
+        public DNA(double minLat, double minLng, double maxLat, double maxLng)
         {
-            this.SetX(X);
-            this.SetY(Y);
-        }
+            Random rnd = new Random();
 
-        private double x;
+            x=(minLat+rnd.NextDouble()*maxLat);
+            y = (minLng + rnd.NextDouble() * maxLng);
+        }
 
         public double GetX()
         {
@@ -28,7 +29,7 @@ namespace GeneticLibrary
             x = value;
         }
 
-        private double y;
+
 
         public double GetY()
         {
@@ -40,8 +41,6 @@ namespace GeneticLibrary
             y = value;
         }
 
-        private double fitness = 0;
-
         public double Getfitness()
         {
             return fitness;
@@ -52,9 +51,9 @@ namespace GeneticLibrary
             fitness = value;
         }
 
-        public DNA mutarHijo()
+        public DNA mutarHijo(double minLat, double minLng, double maxLat, double maxLng)
         {
-            estado = new EstadoMutarLineal();
+            estado = new EstadoMutarLineal( minLat,  minLng,  maxLat,  maxLng);
 
             estado.Actuar(this);
 

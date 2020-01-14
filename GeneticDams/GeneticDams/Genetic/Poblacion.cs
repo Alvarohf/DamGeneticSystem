@@ -9,6 +9,26 @@ namespace GeneticLibrary
         private List<DNA> seleccion = new List<DNA>();
         private IEstrategiaSeleccion estrategiaSeleccion;
         private ICalculadorFitness calculadorFitness;
+        private readonly double minLat;
+        private readonly double minLng;
+        private readonly double maxLat;
+        private readonly double maxLng;
+
+
+        public Poblacion(double minLat, double minLng, double maxLat, double maxLng)
+        {
+            this.minLat = minLat;
+            this.minLng = minLng;
+            this.maxLat = maxLat;
+            this.maxLng = maxLng;
+
+            for (int i = 0; i < popLenght; i++)
+            {
+                dnas.Add(new DNA(minLat, minLng, maxLat, maxLng));
+
+            }
+            Console.WriteLine(dnas.Count + "estoy aqui");
+        }
 
         public IEstrategiaSeleccion GetIEstrategiaSeleccion()
         {
@@ -30,15 +50,6 @@ namespace GeneticLibrary
             calculadorFitness = value;
         }
 
-        public Poblacion()
-        {
-            for (int i = 0; i < popLenght; i++)
-            {
-                dnas.Add(new DNA());
-
-            }
-            Console.WriteLine(dnas.Count + "estoy aqui");
-        }
         public string Simulacion(int iteraciones)
         {
 
@@ -55,7 +66,7 @@ namespace GeneticLibrary
                 }
 
             }
-            return $"Generacion: {dnas[1].GetX()} {dnas[1].GetX()}";
+            return $"Generacion: {dnas[1].GetX()} {dnas[1].GetY()}";
         }
         public void CalcularFitness()
         {
@@ -81,7 +92,7 @@ namespace GeneticLibrary
             Console.WriteLine(this.seleccion.Count);
             for (int i = 0; i < dnas.Count; i++)
             {
-                DNA hijo = generarHijo(seleccion[rnd.Next(seleccion.Count)], seleccion[rnd.Next(seleccion.Count)]).mutarHijo();
+                DNA hijo = generarHijo(seleccion[rnd.Next(seleccion.Count)], seleccion[rnd.Next(seleccion.Count)]).mutarHijo(minLat, minLng, maxLat, maxLng);
                 hijos.Add(hijo);
             }
             double[] fitnesses = this.calculadorFitness.CalcularFitness(hijos);
@@ -97,7 +108,10 @@ namespace GeneticLibrary
         }
         public DNA generarHijo(DNA padre, DNA madre)
         {
-            return new DNA(padre.GetX(), madre.GetY());
+            DNA hijo = new DNA();
+            hijo.SetX(padre.GetX());
+            hijo.SetY(madre.GetY());
+            return hijo;
         }
 
     }

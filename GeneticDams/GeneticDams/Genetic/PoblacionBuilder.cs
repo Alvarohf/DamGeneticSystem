@@ -10,9 +10,9 @@ namespace GeneticLibrary
             return poblacion;
         }
 
-        public void CrearNuevaPoblacion()
+        public void CrearNuevaPoblacion(double minLat, double minLng, double maxLat, double maxLng)
         {
-            poblacion = new Poblacion();
+            poblacion = new Poblacion(minLat, minLng, maxLat, maxLng);
         }
 
         public abstract void CrearCalculadorFitness();
