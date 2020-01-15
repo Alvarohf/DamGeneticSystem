@@ -8,13 +8,14 @@ using GoogleMapsApi;
 using System.Collections.Generic;
 using System;
 using System.Globalization;
+using GeneticDams.BLL.SignalRChat.Hubs;
 
 namespace GeneticDams.BLL
 {
     public class Pattern
     {
         public string Result { get; set; }
-        public Location[] Locations { get; set; }
+        public Location[][] Locations{ get; set; }
 
         public Pattern(List<Double> limites)
         {
@@ -23,14 +24,22 @@ namespace GeneticDams.BLL
             PoblacionBuilder pE = new PoblacionEliteBuilder();
             // ROLLO MENU
             PoblacionBuilder pR = new PoblacionRuedaRuletaBuilder();
-            creador.SetPoblacionBuilder(pE);
+            creador.SetPoblacionBuilder(pR);
             creador.CrearPoblacion();
             p = creador.GetPoblacion();
-            Locations = p.Simulacion(1);
-            foreach (Location location in Locations)
+            int num = 10;
+            Locations = new Location[num][];
+            Location[] oneLocation;
+            for (int i = 0; i < num; i++)
             {
-                Result += $"Position: Lat:{location.Latitude} Lon:{location.Longitude}";
+                Locations[i] = new Location[20];
+                oneLocation = p.Simulacion(1);
+                for (int j = 0; j < oneLocation.Length-1; j++) {
+                    Locations[i][j] = oneLocation[j];
+                        }
+                Result = "";
             }
+
         }
     }
 

@@ -5,13 +5,24 @@ namespace GeneticLibrary
     {
 
 
-        public void Seleccion(List<DNA> poblacion, List<DNA> seleccion)
+        public void Seleccion(List<DNA> poblacion, List<DNA> seleccion, bool max)
         {
-            poblacion.Sort(new DNAComparame());
-            poblacion.Reverse();
-            for (int i = 0; i < poblacion.Count / 2; i++)
+            if (max)
             {
-                seleccion.Add(poblacion[i]);
+                poblacion.Sort(new DNAComparame());
+                poblacion.Reverse();
+                for (int i = 0; i < poblacion.Count / 2; i++)
+                {
+                    seleccion.Add(poblacion[i]);
+                }
+            }
+            else
+            {
+                poblacion.Sort(new DNAComparame());
+                for (int i = 0; i < poblacion.Count / 2; i++)
+                {
+                    seleccion.Add(poblacion[i]);
+                }
             }
 
         }

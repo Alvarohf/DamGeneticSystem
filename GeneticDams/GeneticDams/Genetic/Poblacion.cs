@@ -14,7 +14,8 @@ namespace GeneticLibrary
         private readonly double minLng;
         private readonly double maxLat;
         private readonly double maxLng;
-
+        private DNA bestDNA;
+        private bool max = false;
 
         public Poblacion(double minLat, double minLng, double maxLat, double maxLng)
         {
@@ -53,23 +54,28 @@ namespace GeneticLibrary
         public Location[] Simulacion(int iteraciones)
         {
             Location[] localizaciones = new Location[dnas.Count];
-            for (int i = 0; i < iteraciones; i++)
-            {
-                CalcularFitness();
-                Seleccion();
-                GenerarPoblacion();
-                int j = 0;
-                foreach (DNA dna in dnas)
-                {
-                    Console.WriteLine($"Generacion: {i}, DNA: {j} X:{dna.GetX()} Y:{dna.GetY()}");
-                    j++;
-                }
 
-            }
-            for ( int i = 0; i<dnas.Count; i++)
+            CalcularFitness();
+            Seleccion();
+            GenerarPoblacion();
+            bestDNA = dnas[0];
+            foreach (DNA dna in dnas)
             {
-                localizaciones[i] = new Location(dnas[i].GetX(),dnas[i].GetY());
+                if (!comparar(bestDNA.Getfitness(), dna.Getfitness()))
+                {
+                    bestDNA = dna;
+                }
             }
+            for (int i = 0; i < dnas.Count; i++)
+            {
+                localizaciones[i] = new Location(dnas[i].GetX(), dnas[i].GetY());
+            }
+            for (int i = 0; i < dnas.Count; i++)
+            {
+                System.Diagnostics.Debug.WriteLine("DNAS Fitness:"+dnas[i].Getfitness());
+            }
+            System.Diagnostics.Debug.WriteLine("Best Fitness:" + bestDNA.Getfitness());
+            localizaciones[0] = new Location(bestDNA.GetX(), bestDNA.GetY());
             return localizaciones;
         }
         public void CalcularFitness()
@@ -86,7 +92,7 @@ namespace GeneticLibrary
 
         public void Seleccion()
         {
-            estrategiaSeleccion.Seleccion(this.dnas, this.seleccion);
+            estrategiaSeleccion.Seleccion(this.dnas, this.seleccion, this.max);
 
         }
         public void GenerarPoblacion()
@@ -103,7 +109,8 @@ namespace GeneticLibrary
 
             for (int i = 0; i < dnas.Count; i++)
             {
-                if (fitnesses[i]>dnas[i].Getfitness())
+                hijos[i].Setfitness(fitnesses[i]);
+                if (comparar(fitnesses[i], dnas[i].Getfitness()))
                 {
                     dnas[i] = hijos[i];
                 }
@@ -117,7 +124,19 @@ namespace GeneticLibrary
             hijo.SetY(madre.GetY());
             return hijo;
         }
-
+        public bool comparar(double x, double y)
+        {
+            bool mejor;
+            if (max)
+            {
+                mejor = x > y;
+            }
+            else
+            {
+                mejor = x < y;
+            }
+            return mejor;
+        }
     }
 }
 

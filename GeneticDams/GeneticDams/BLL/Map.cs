@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeneticDams.BLL
 {
-    public class Map
+    public class Map2
     {
         // Map location
         public string MapString;
@@ -16,7 +16,7 @@ namespace GeneticDams.BLL
         // Array of colours
         public int ColourCollection { get; }
 
-        public Map(bool p_measure, int p_colourCollection,int p_step,string p_map="/maps/map.json")
+        public Map2(bool p_measure, int p_colourCollection,int p_step,string p_map="/maps/map.json")
         {
             this.Step = p_step;
             this.Measure = p_measure;

@@ -5,25 +5,47 @@ namespace GeneticLibrary
     public class EstrategiaSeleccionRuedaRuleta : IEstrategiaSeleccion
     {
 
-        public void Seleccion(List<DNA> poblacion, List<DNA> seleccion)
+        public void Seleccion(List<DNA> poblacion, List<DNA> seleccion, bool max)
         {
-            double maxFit = 0;
-            for (int i = 0; i < poblacion.Count; i++)
+            if (max)
             {
-                if (poblacion[i].Getfitness() > maxFit)
+                double maxFit = 0;
+                for (int i = 0; i < poblacion.Count; i++)
                 {
-                    maxFit = poblacion[i].Getfitness();
+                    if (poblacion[i].Getfitness() > maxFit)
+                    {
+                        maxFit = poblacion[i].Getfitness();
+                    }
+                }
+                for (int i = 0; i < poblacion.Count; i++)
+                {
+                    double n = Math.Round(poblacion[i].Getfitness() / maxFit * 10000);
+                    for (int j = 0; j < n; j++)
+                    {
+                        seleccion.Add(poblacion[i]);
+                    }
+
+
                 }
             }
-            for (int i = 0; i < poblacion.Count; i++)
+            else
             {
-                double n = Math.Round(poblacion[i].Getfitness() / maxFit * 10000);
-                for (int j = 0; j < n; j++)
+                double maxFit = 0;
+                for (int i = 0; i < poblacion.Count; i++)
                 {
-                    seleccion.Add(poblacion[i]);
+                    if (poblacion[i].Getfitness() > maxFit)
+                    {
+                        maxFit = poblacion[i].Getfitness();
+                    }
                 }
-
-
+                for (int i = 0; i < poblacion.Count; i++)
+                {
+                    double n = Math.Round(maxFit / (poblacion[i].Getfitness() + 1) * 100);
+                    for (int j = 0; j < n; j++)
+                    {
+                        seleccion.Add(poblacion[i]);
+                    }
+                }
             }
 
         }

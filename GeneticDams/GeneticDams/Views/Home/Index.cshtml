@@ -12,8 +12,34 @@
     <h1 class="display-4">Genetic Dam System <i class="fas fa-dna"></i></h1>
     <p>This project finds the best spot in a topographic map to put a dam with genetic algorithms</p>
 </div>
-<input type="button" class="btn btn-primary mb-3" value="Click to Display Map" onclick="startMap('maps/map.json','map_1')" />
-<div id="myDiv" style="width:100%;height:400px;"></div>
+<div class="row">
+    <div class="col-10">
+        <div id="myDiv" style="width:100%;height:400px;"></div>
+    </div>
+    <div class="form-group col-2">
+        <label for="colorSelector" class="font-weight-bold">Map colors</label>
+        <select class="form-control" id="colorSelector">
+            <option>Normal</option>
+            <option>Greys</option>
+            <option>Warm</option>
+        </select>
+
+
+        <label for="unitSelector" class="font-weight-bold">Map units</label>
+        <select class="form-control" id="unitSelector">
+            <option>Meters</option>
+            <option>Feets</option>
+        </select>
+        <label for="unitSelector" class="font-weight-bold">Map units</label>
+        <select class="form-control" id="unitSelector">
+            <option>Normal</option>
+            <option>100 meters</option>
+            <option>50 meters</option>
+        </select>
+        <input type="submit" class="btn btn-info mt-3" value="Modify map" onclick="" />
+    </div>
+</div>
+
 <p id="info-box"></p>
 @{
     //ConcreteAggregate a = new ConcreteAggregate();
@@ -26,7 +52,8 @@
     int i = 2;
     <nav>
         <div class="row">
-            <ul class="pagination col-md-10" id="mapNav">
+            <input type="button" class="btn btn-primary mb-3 mr-3" value="Click to display map" onclick="startMap('maps/map.json','map_1')" />
+            <ul class="pagination col-md-8" id="mapNav">
                 <li id="map_1" class="page-item"><a id="@mapIterator.First().MapString" href="#" class="page-link" onclick="startMap(this.id,'map_1')">map_1</a></li>
                 @while (maps.Count + 1 > i)
                 {
@@ -36,21 +63,30 @@
             </ul>
             <button class="btn btn-success h-50 d-inline" onclick="location.href='@Url.Action("Download", "Home")?fileName=' + getFile()+ '&login=' + '@SignInManager.IsSignedIn(User)' " download> Download <i class="fas fa-download"></i></button>
         </div>
-        
+
     </nav>
 }
 @if (ViewData["Error"] != null)
 {
     <div id="alert" class="alert alert-danger" role="alert">
-        Error downloading your map, because you are not logged in or you have not displayed a map. <i class="fas fa-exclamation-triangle"></i>  
+        Error downloading your map, because you are not logged in or you have not displayed a map. <i class="fas fa-exclamation-triangle"></i>
         <button type="button" class="close" data-dismiss="alert" onclick="location.href='@Url.Action("Index", "Home")'">&times;</button>
     </div>
-    {ViewData["Error"] = null;}
+    { ViewData["Error"] = null; }
 }
 <div class="container">
     <div class="row">
-        <input type="button" id="sendButton" class="btn btn-success mb-3" value="Start Algorithm" />
-        <fieldset disabled class="col-md-10">
+        <form class="col-5">
+            <div class="row">
+                <input type="button" id="sendButton" class="btn btn-success mb-3 mr-4  col-6" value="Start Algorithm" />
+                <select class="form-control col-5" id="algorithmSelector">
+                    <option>Hills</option>
+                    <option>Valleys</option>
+                    <option>Dams</option>
+                </select>
+                </div>
+        </form>
+        <fieldset disabled class="col-7">
             <div class="form-group ml-3">
                 <input type="text" id="result" class="form-control" placeholder="Result">
             </div>
@@ -77,6 +113,7 @@
         var map;
         var mainMarker;
         var markers;
+        var allIcons;
         function startMap(name, li_id) {
             // We remove active button
             var elements = document.getElementById("mapNav").getElementsByTagName("li");
@@ -103,10 +140,10 @@
                     icon: "/res/dam_red.png"
                 },
                 good: {
-                    icon: "/res/good-spot.png"
+                    icon: "/res/good-spot2.png"
                 }
             };
-
+            allIcons = icons;
             // Load GeoJSON
             mapJson(map, name)
             // Custom the map colors
@@ -242,15 +279,39 @@
         document.getElementById("sendButton").disabled = true;
 
         // Receive data from the server
+        var locationsss;
+         var markers = [];
         connection.on("ReceiveMessage", function (locations, message) {
+            locationsss = locations;
             var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             document.getElementById("result").value = message;
+            var i = 0;
+            initMarkers(20);
+            while (i < locations.length - 1) {
+                
+                for (var j = 1; j < locations[0].length - 1; j++) {
+                        restMarkerTimeout(i, j, markers[j]);
+                }
+                mainMarkerTimeout(i);
+                i++;
 
-            changeMarkerPosition(mainMarker,locations[0]);
-            console.log(message)
-            console.log(locations[0])
+            }
+
         });
-
+        function initMarkers(quantity) {
+                for (var i = 0; i < quantity; i++) {
+                        markers[i] = placeMarker(null,allIcons, "good")
+                    }
+                
+        }
+        function mainMarkerTimeout(i) {
+            console.log("Principal"+locationsss[i][0])
+            setTimeout(function() {changeMarkerPosition(mainMarker,locationsss[i][0]); }, i*1000);
+        }
+        function restMarkerTimeout(i, j, marker) {
+            console.log("Principal"+locationsss[i][j])
+             setTimeout(function() {changeMarkerPosition(marker,locationsss[i][j]); }, i*800);
+        }
         // Start connection on click
         connection.start().then(function () {
             document.getElementById("sendButton").disabled = false;
