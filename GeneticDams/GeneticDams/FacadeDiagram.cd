@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GeneticLibrary.Poblacion">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAMAAAAAAgEIAAkQAAAEABAAAKAgBAAABQAABEQAA=</HashCode>
+      <FileName>Genetic\Poblacion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="calculadorFitness" />
+      <Field Name="estrategiaSeleccion" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="GeneticLibrary.ICalculadorFitness" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Genetic\ICalculadorFitness.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GeneticLibrary.IEstrategiaSeleccion" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Genetic\IEstrategiaSeleccion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
