@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GeneticLibrary.EstrategiaSeleccionElite">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Genetic\EstrategiaSeleccionElite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GeneticLibrary.EstrategiaSeleccionRuedaRuleta">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Genetic\EstrategiaSeleccionRR.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GeneticLibrary.Poblacion" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAMAAAAAAgEIAAkQAAAEABAAAKAgBAAABQAABEQAA=</HashCode>
+      <FileName>Genetic\Poblacion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="estrategiaSeleccion" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="GeneticLibrary.IEstrategiaSeleccion">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Genetic\IEstrategiaSeleccion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
