@@ -9,13 +9,13 @@
     //ConcreteAggregate a = new ConcreteAggregate();
     MapAggregate maps = new MapAggregate();
     SingleFactoryMap factory = SingleFactoryMap.GetInstance();
-    factory.getMap(1, "maps/map.json").geometryType();
-    
-    maps[0] = factory.getMap(0, "maps/map.json");
-    maps[1] = factory.getMap(1, "maps/map10m.json");
-    maps[2] = factory.getMap(1, "maps/map25m.json");
-    maps[3] = factory.getMap(1, "maps/map25m2.json");
-    Iterator mapIterator = maps.CreateIterator();
+    factory.GetMap(1, "maps/map.json").geometryType();
+
+    maps[0] = factory.GetMap(0, "maps/map.json");
+    maps[1] = factory.GetMap(1, "maps/map10m.json");
+    maps[2] = factory.GetMap(1, "maps/map25m.json");
+    maps[3] = factory.GetMap(1, "maps/map25m2.json");
+    MapIterator mapIterator = maps.CreateIterator();
     int j = 2;
     int i = 2;
 }
@@ -33,19 +33,17 @@
             @{
                         <div id="dataMap_1" class="d-none">
                             <p><b>Map data <i class="fas fa-layer-group mt-3"></i></b></p>
-                            <pre class="text-muted">@mapIterator.First().getInformation()</pre>
+                            <p>@mapIterator.First().getInformation()</p>
                             <p><b>Min height:</b> @mapIterator.First().MinHeight()<i class="fas fa-long-arrow-alt-down text-danger ml-2"></i></p>
                             <p><b>Max height:</b> @mapIterator.First().MaxHeight()<i class="fas fa-long-arrow-alt-up text-success ml-2"></i></p>
-                            <p><b>Units: </b>@mapIterator.First().GetUnit() <i class="fas fa-ruler text-muted"></i></p>
                         </div>
                 @while (maps.Count +1> j)
                 {
                     <div id="dataMap_@j" class="d-none">
                         <p><b>Map data <i class="fas fa-layer-group mt-3"></i></b></p>
-                        <pre id="layers" class="text-muted">@mapIterator.Next().getInformation()</pre>
+                        <p>@mapIterator.Next().getInformation()</p>
                         <p><b>Min height:</b> @mapIterator.CurrentItem.MinHeight()<i class="fas fa-long-arrow-alt-down text-danger ml-2"></i></p>
                         <p><b>Max height:</b> @mapIterator.CurrentItem.MaxHeight()<i class="fas fa-long-arrow-alt-up text-success ml-2"></i></p>
-                        <p><b>Units: </b>@mapIterator.CurrentItem.GetUnit() <i class="fas fa-ruler text-muted"></i></p>
                     </div>
                     j++;
                 }
@@ -83,14 +81,18 @@
 }
 <div class="container">
     <div class="row">
-            <div class="row">
-                <input type="button" id="sendButton" class="btn btn-success mb-3 mr-4  col-6" value="Start Algorithm" />
-                <select class="form-control col-5" id="algorithmSelector">
-                    <option>Hills</option>
-                    <option>Valleys</option>
-                </select>
-            </div>
-        <fieldset disabled class="col-7">
+        <div class="row col-7">
+            <input type="button" id="sendButton" class="btn btn-success mb-3 mr-4  col-4" value="Start Algorithm" />
+            <select class="form-control col-3 ml-" id="algorithmSelector">
+                <option>Hills</option>
+                <option>Valleys</option>
+            </select>
+            <select class="form-control col-3 ml-4" id="strategySelector">
+                <option>Elite</option>
+                <option>Roulette</option>
+            </select>
+        </div>
+        <fieldset class="col-5">
             <div class="form-group ml-3">
                 <input type="text" id="result" class="form-control" placeholder="Result">
             </div>
@@ -314,11 +316,13 @@
 
             var selection = document.getElementById("algorithmSelector");
             var typeAlgorithm = selection.options[selection.selectedIndex].value;
+            var strategy = document.getElementById("strategySelector");
+            var typeStrategy = selection.options[strategy.selectedIndex].value;
             console.log(MapBounds)
             if (MapBounds !== undefined) {
                 document.getElementById("result").classList.remove("text-danger");
                 var message = MapBounds.toString();
-                connection.invoke("SendMessage", typeAlgorithm, message).catch(function (err) {
+                connection.invoke("SendMessage",typeStrategy, typeAlgorithm, message).catch(function (err) {
                     return console.error(err.toString());
                 });
             } else {

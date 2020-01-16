@@ -5,13 +5,18 @@ using System;
 namespace GeneticDams.BLL
 {
     /// <summary>
-    /// Abstract handler to implement
+    /// Abstract handler to implement the chain of responsability
     /// </summary>
     public abstract class AbstractHandler
     {
         // Self reference
         private AbstractHandler _nextHandler;
 
+        /// <summary>
+        /// Set the next handler to use in the chain
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <returns></returns>
         public AbstractHandler SetNext(AbstractHandler handler)
         {
             _nextHandler = handler;
@@ -39,12 +44,19 @@ namespace GeneticDams.BLL
     }
 
     /// <summary>
-    /// This class implements AbstractHandler
+    /// This class implements AbstractHandler for a normal user
     /// </summary>
     public class UserHandler : AbstractHandler
     {
-        public override object Handle(object request)
+        /// <summary>
+        /// Handle a request for a normal user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A string with user</returns>
+        override
+        public object Handle(object request)
         {
+            // All users are normal users
             if ((request as string) != "")
             {
                 return "User";
@@ -58,12 +70,19 @@ namespace GeneticDams.BLL
     }
 
     /// <summary>
-    /// This class implements AbstractHandler
+    /// This class implements AbstractHandler for admin
     /// </summary>
     public class AdminHandler : AbstractHandler
     {
-        public override object Handle(object request)
+        /// <summary>
+        /// Handle a request for an admin
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A string with admin</returns>
+        override
+        public object Handle(object request)
         {
+            // Only the admin passes
             if (request.ToString() == "admin@uah.es")
             {
                 return "Admin";
@@ -80,7 +99,13 @@ namespace GeneticDams.BLL
     /// </summary>
     public class SpecialistHandler : AbstractHandler
     {
-        public override object Handle(object request)
+        /// <summary>
+        /// Handle a request for a specialist
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A string with specialist</returns>
+        override
+        public object Handle(object request)
         {
             if (request.ToString() == "spec@uah.es")
             {
@@ -92,8 +117,17 @@ namespace GeneticDams.BLL
             }
         }
     }
-    public  class ClientHandler
+    /// <summary>
+    /// Class that use the handlers
+    /// </summary>
+    public class ClientHandler
     {
+        /// <summary>
+        /// Use the handlers to get the type
+        /// </summary>
+        /// <param name="handler">Handler to use</param>
+        /// <param name="userType">User type to use in the handler</param>
+        /// <returns>A string with the type of user</returns>
         public static string Use(AbstractHandler handler, String userType)
         {
                 var result = handler.Handle(userType);
