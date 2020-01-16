@@ -6,6 +6,18 @@
 
 @{
     ViewData["Title"] = "Genetic Dam System";
+    //ConcreteAggregate a = new ConcreteAggregate();
+    MapAggregate maps = new MapAggregate();
+    SingleFactoryMap factory = SingleFactoryMap.GetInstance();
+    factory.getMap(1, "maps/map.json").geometryType();
+    
+    maps[0] = factory.getMap(0, "maps/map.json");
+    maps[1] = factory.getMap(1, "maps/map10m.json");
+    maps[2] = factory.getMap(1, "maps/map25m.json");
+    maps[3] = factory.getMap(1, "maps/map25m2.json");
+    Iterator mapIterator = maps.CreateIterator();
+    int j = 2;
+    int i = 2;
 }
 
 <div class="text-center">
@@ -17,47 +29,50 @@
         <div id="myDiv" style="width:100%;height:400px;"></div>
     </div>
     <div class="form-group col-2">
-        <label for="colorSelector" class="font-weight-bold">Map colors</label>
-        <select class="form-control" id="colorSelector">
-            <option>Normal</option>
-            <option>Greys</option>
-            <option>Warm</option>
-        </select>
+        <form>
+            <label for="unitSelector" class="font-weight-bold">Map units</label>
+            <select class="form-control" id="unitSelector">
+                <option>Meters</option>
+                <option>Feets</option>
+            </select>
 
-
-        <label for="unitSelector" class="font-weight-bold">Map units</label>
-        <select class="form-control" id="unitSelector">
-            <option>Meters</option>
-            <option>Feets</option>
-        </select>
-        <label for="unitSelector" class="font-weight-bold">Map units</label>
-        <select class="form-control" id="unitSelector">
-            <option>Normal</option>
-            <option>100 meters</option>
-            <option>50 meters</option>
-        </select>
-        <input type="submit" class="btn btn-info mt-3" value="Modify map" onclick="" />
+            <input type="submit" class="btn btn-info mt-3" value="Update data" onclick="" />
+        </form>
+        <div>
+            @{
+                        <div id="dataMap_1" class="d-none">
+                            <pre class="text-muted">@mapIterator.First().getInformation()</pre>
+                            <p><b>Min height:</b> @mapIterator.First().MinHeight()<i class="fas fa-long-arrow-alt-down text-danger ml-2"></i></p>
+                            <p><b>Max height:</b> @mapIterator.First().MaxHeight()<i class="fas fa-long-arrow-alt-up text-success ml-2"></i></p>
+                            <p><b>Units: </b>@mapIterator.First().GetUnit() <i class="fas fa-ruler text-muted"></i></p>
+                        </div>
+                @while (maps.Count +1> j)
+                {
+                    <div id="dataMap_@j" class="d-none">
+                        <p><b>Map data <i class="fas fa-layer-group mt-3"></i></b></p>
+                        <pre id="layers" class="text-muted">@mapIterator.Next().getInformation()</pre>
+                        <p><b>Min height:</b> @mapIterator.CurrentItem.MinHeight()<i class="fas fa-long-arrow-alt-down text-danger ml-2"></i></p>
+                        <p><b>Max height:</b> @mapIterator.CurrentItem.MaxHeight()<i class="fas fa-long-arrow-alt-up text-success ml-2"></i></p>
+                        <p><b>Units: </b>@mapIterator.CurrentItem.GetUnit() <i class="fas fa-ruler text-muted"></i></p>
+                    </div>
+                    j++;
+                }
+            }
+        </div>
     </div>
+
 </div>
 
 <p id="info-box"></p>
 @{
-    //ConcreteAggregate a = new ConcreteAggregate();
-    MapAggregate maps = new MapAggregate();
-    maps[0] = new Map(true, 1, 100, "maps/map.json");
-    maps[1] = new Map(true, 1, 100, "maps/map10m.json");
-    maps[2] = new Map(true, 1, 100, "maps/map25m.json");
-    maps[3] = new Map(true, 1, 100, "maps/map25m2.json");
-    Iterator mapIterator = maps.CreateIterator();
-    int i = 2;
     <nav>
         <div class="row">
-            <input type="button" class="btn btn-primary mb-3 mr-3" value="Click to display map" onclick="startMap('maps/map.json','map_1')" />
+            <input type="button" class="btn btn-primary mb-3 mr-3" value="Click to display map" onclick="startMap('maps/map.json','1')" />
             <ul class="pagination col-md-8" id="mapNav">
-                <li id="map_1" class="page-item"><a id="@mapIterator.First().MapString" href="#" class="page-link" onclick="startMap(this.id,'map_1')">map_1</a></li>
+                <li id="map_1" class="page-item"><a id="@mapIterator.First().MapString" href="#" class="page-link" onclick="startMap(this.id,'1')">map_1</a></li>
                 @while (maps.Count + 1 > i)
                 {
-                    <li id="map_@i" class="page-item"><a id="@mapIterator.Next().MapString" href="#" class="page-link" onclick="startMap(this.id,'map_@i')">map_@i</a></li>
+                    <li id="map_@i" class="page-item"><a id="@mapIterator.Next().MapString" href="#" class="page-link" onclick="startMap(this.id,'@i')">map_@i</a></li>
                     i++;
                 }
             </ul>
@@ -84,7 +99,7 @@
                     <option>Valleys</option>
                     <option>Dams</option>
                 </select>
-                </div>
+            </div>
         </form>
         <fieldset disabled class="col-7">
             <div class="form-group ml-3">
@@ -118,12 +133,18 @@
             // We remove active button
             var elements = document.getElementById("mapNav").getElementsByTagName("li");
             for (var i = 0; i < elements.length; i++) {
-                console.log(elements[i])
                 elements[i].classList.remove("active");
             }
+            //We hide all the data
+            var datas = document.querySelectorAll('[id^="dataMap"]');
+            for (var i = 0; i < elements.length; i++) {
+                datas[i].classList.add("d-none");
+            }
             // We add new active button
-            var element = document.getElementById(li_id);
+            var element = document.getElementById("map_"+li_id);
             element.classList.toggle("active");
+            var element = document.getElementById("dataMap_"+li_id);
+            element.classList.remove("d-none");
             displayGoogleMap(name);
         }
         function displayGoogleMap(name) {
@@ -140,7 +161,7 @@
                     icon: "/res/dam_red.png"
                 },
                 good: {
-                    icon: "/res/good-spot2.png"
+                    icon: "/res/shrek.png"
                 }
             };
             allIcons = icons;
@@ -178,8 +199,8 @@
             console.log(bounds)
             // Get data from the layers
             map.data.addListener('mouseover', function (event) {
-                document.getElementById('info-box').textContent =
-                    event.feature.getProperty('elevation') + event.latLng;
+                document.getElementById('info-box').textContent = "Elevation: " +
+                    event.feature.getProperty('elevation')+ " Coords: "+ event.latLng;
             });
 
             // Change marker position
@@ -280,7 +301,7 @@
 
         // Receive data from the server
         var locationsss;
-         var markers = [];
+        var markers = [];
         connection.on("ReceiveMessage", function (locations, message) {
             locationsss = locations;
             var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -288,9 +309,9 @@
             var i = 0;
             initMarkers(20);
             while (i < locations.length - 1) {
-                
+
                 for (var j = 1; j < locations[0].length - 1; j++) {
-                        restMarkerTimeout(i, j, markers[j]);
+                    restMarkerTimeout(i, j, markers[j]);
                 }
                 mainMarkerTimeout(i);
                 i++;
@@ -299,18 +320,18 @@
 
         });
         function initMarkers(quantity) {
-                for (var i = 0; i < quantity; i++) {
-                        markers[i] = placeMarker(null,allIcons, "good")
-                    }
-                
+            for (var i = 0; i < quantity; i++) {
+                markers[i] = placeMarker(null, allIcons, "good")
+            }
+
         }
         function mainMarkerTimeout(i) {
-            console.log("Principal"+locationsss[i][0])
-            setTimeout(function() {changeMarkerPosition(mainMarker,locationsss[i][0]); }, i*1000);
+            console.log("Principal" + locationsss[i][0])
+            setTimeout(function () { changeMarkerPosition(mainMarker, locationsss[i][0]); }, i * 1000);
         }
         function restMarkerTimeout(i, j, marker) {
-            console.log("Principal"+locationsss[i][j])
-             setTimeout(function() {changeMarkerPosition(marker,locationsss[i][j]); }, i*800);
+            console.log("Principal" + locationsss[i][j])
+            setTimeout(function () { changeMarkerPosition(marker, locationsss[i][j]); }, i * 800);
         }
         // Start connection on click
         connection.start().then(function () {
