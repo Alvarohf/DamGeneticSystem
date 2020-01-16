@@ -4,7 +4,13 @@ namespace GeneticLibrary
 {
     public class EstrategiaSeleccionRuedaRuleta : IEstrategiaSeleccion
     {
-
+        /// <summary>
+        /// Estrategia que genera una matriz de reproducion añadiendo mas del mismo DNA segun su fitness
+        /// implementa el patron strategy
+        /// </summary>
+        /// <param name="poblacion"></param>
+        /// <param name="seleccion"></param>
+        /// <param name="max"></param>
         public void Seleccion(List<DNA> poblacion, List<DNA> seleccion, bool max)
         {
             if (max)

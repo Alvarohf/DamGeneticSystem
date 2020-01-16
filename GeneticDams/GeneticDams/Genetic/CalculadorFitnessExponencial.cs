@@ -10,7 +10,13 @@ namespace GeneticLibrary
         {
 
         }
-
+        /// <summary>
+        /// Add la funcionalidad extra de elevar al cuadrado las fitness para darle mas peso
+        /// a los individuos mas competentes
+        /// implementa el patron decorator
+        /// </summary>
+        /// <param name="dna"></param>
+        /// <returns></returns>
         public double[] CalcularFitness(List<DNA> dna)
         {
             //base es como super en  c#

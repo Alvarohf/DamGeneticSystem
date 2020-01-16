@@ -50,8 +50,14 @@ namespace GeneticLibrary
         {
             calculadorFitness = value;
         }
-
-        public Location[] Simulacion(int iteraciones)
+        /// <summary>
+        /// Proceso para simular una generacion Pasos:
+        ///Calcular la fitness de los indivudos mediante el proceso calcFitness
+        ///Crear una matriz de reproducion mediante el proceso Selection
+        ///Creara la nueva poblacion combinando y mutando individuos de la matriz de reproducion mediante el proceso generate
+        /// </summary>
+        /// <returns></returns>
+        public Location[] Simulacion()
         {
             Location[] localizaciones = new Location[dnas.Count];
 
@@ -78,6 +84,9 @@ namespace GeneticLibrary
             localizaciones[0] = new Location(bestDNA.GetX(), bestDNA.GetY());
             return localizaciones;
         }
+        /// <summary>
+        /// Proceso que calcula la fitness de cada individuo utilizando la interfaz ICalculadorFitness que implementa el patron decorator
+        /// </summary>
         public void CalcularFitness()
         {
 
@@ -89,12 +98,24 @@ namespace GeneticLibrary
                 Console.WriteLine($"Fitness: {dnas[i].Getfitness()}");
             }
         }
-
+        /// <summary>
+        /// Proceso que crea la matriz de reporducion de esta generacion mediante la interfaz IEstrategiaSeleccion 
+        /// que implementa el patron strategy
+        /// </summary>
         public void Seleccion()
         {
             estrategiaSeleccion.Seleccion(this.dnas, this.seleccion, this.max);
 
         }
+        /// <summary>
+        ///Proceso que crea una nueva poblacion
+        ///La creacion de la poblacion se realiza:
+        ///eligiendo 2 DNAs de la matriz de reproducion
+        ///Utilizando el metodo generarHijo() de poblacion para crear un hijo combinando los otros 2 DNAs
+        ///Utilizando el metodo generarHijo() de dna que implementa el patron state para cambiar sus genes
+        ///Añadir al hijo a la poblacion
+        ///Repetir hasta tener una nueva poblacion del mismo tamaño que la anterior
+        /// </summary>
         public void GenerarPoblacion()
         {
             List<DNA> hijos = new List<DNA>();

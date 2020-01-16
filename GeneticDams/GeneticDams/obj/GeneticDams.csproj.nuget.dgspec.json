@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {}
+    "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {}
   },
   "projects": {
-    "D:\\github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {
+    "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
+        "projectUniqueName": "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
         "projectName": "GeneticDams",
-        "projectPath": "D:\\github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
-        "packagesPath": "C:\\Users\\Alvarohf\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\obj\\",
+        "projectPath": "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
+        "packagesPath": "C:\\Users\\josel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Alvarohf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\josel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

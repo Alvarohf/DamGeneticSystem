@@ -15,7 +15,10 @@ namespace GeneticLibrary
             this.maxLat = maxLat;
             this.maxLng = maxLng;
         }
-
+        /// <summary>
+        /// modifica de manera aleatoria los genes del dna dentro de un margen
+        /// </summary>
+        /// <param name="dna"></param>
         public void Actuar(DNA dna)
         {
             {

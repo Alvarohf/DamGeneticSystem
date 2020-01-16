@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-GeneticDams-3C62CB7D-6DE9-45EC-821A-BF94A6653D03")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeneticDams")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

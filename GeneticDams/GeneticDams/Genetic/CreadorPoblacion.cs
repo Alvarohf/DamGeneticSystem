@@ -22,6 +22,11 @@ namespace GeneticLibrary
         {
             return PoblacionBuilder.GetPoblacion();
         }
+        /// <summary>
+        /// el creador del patron builder
+        /// llama a los metodos la clase abstracta PoblacionBuilder
+        /// para crear una nueva poblacion
+        /// </summary>
         public void CrearPoblacion()
         {
             PoblacionBuilder.CrearNuevaPoblacion( minLat,  minLng,  maxLat,  maxLng);

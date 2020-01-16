@@ -33,7 +33,7 @@ namespace GeneticDams.BLL
             for (int i = 0; i < num; i++)
             {
                 Locations[i] = new Location[20];
-                oneLocation = p.Simulacion(1);
+                oneLocation = p.Simulacion();
                 for (int j = 0; j < oneLocation.Length-1; j++) {
                     Locations[i][j] = oneLocation[j];
                         }
