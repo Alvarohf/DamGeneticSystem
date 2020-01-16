@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {}
+    "C:\\Github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {}
   },
   "projects": {
-    "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {
+    "C:\\Github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
+        "projectUniqueName": "C:\\Github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
         "projectName": "GeneticDams",
-        "projectPath": "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
-        "packagesPath": "C:\\Users\\josel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\josel\\Desktop\\Uni\\Patrones\\DamGeneticSystem\\GeneticDams\\GeneticDams\\obj\\",
+        "projectPath": "C:\\Github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\GeneticDams.csproj",
+        "packagesPath": "C:\\Users\\Cliri\\.nuget\\packages\\",
+        "outputPath": "C:\\Github\\DamGeneticSystem\\GeneticDams\\GeneticDams\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\josel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Cliri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,16 +68,10 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }

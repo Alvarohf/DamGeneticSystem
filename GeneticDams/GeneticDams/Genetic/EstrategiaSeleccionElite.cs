@@ -4,15 +4,7 @@ namespace GeneticLibrary
     public class EstrategiaSeleccionElite : IEstrategiaSeleccion
     {
 
-        /// <summary>
-        ///Para crear la matriz de reproduccion:
-        ///Ordenamos los indivuos mediante su fitness
-        ///Tomamos la mitad de la poblacion como matriz de reproduccion
-        ///implementa el patron strategy
-        /// </summary>
-        /// <param name="poblacion"></param>
-        /// <param name="seleccion"></param>
-        /// <param name="max"></param>
+
         public void Seleccion(List<DNA> poblacion, List<DNA> seleccion, bool max)
         {
             if (max)

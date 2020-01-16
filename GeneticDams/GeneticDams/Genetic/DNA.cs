@@ -50,15 +50,7 @@ namespace GeneticLibrary
         {
             fitness = value;
         }
-        /// <summary>
-        /// cambia el estado de la clase a el estado mutando
-        /// y llama al metodo actuar del estado
-        /// </summary>
-        /// <param name="minLat"></param>
-        /// <param name="minLng"></param>
-        /// <param name="maxLat"></param>
-        /// <param name="maxLng"></param>
-        /// <returns></returns>
+
         public DNA mutarHijo(double minLat, double minLng, double maxLat, double maxLng)
         {
             estado = new EstadoMutarLineal( minLat,  minLng,  maxLat,  maxLng);

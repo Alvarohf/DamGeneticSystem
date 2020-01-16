@@ -7,12 +7,15 @@ namespace GeneticLibrary
         private readonly double minLng;
         private readonly double maxLat;
         private readonly double maxLng;
-        public CreadorPoblacion(double minLat, double minLng, double maxLat, double maxLng)
+        // True search for hills false search for valleys
+        private readonly bool algorithm;
+        public CreadorPoblacion(double minLat, double minLng, double maxLat, double maxLng,bool algorithm)
         {
             this.maxLat = maxLat;
             this.maxLng = maxLng;
             this.minLat = minLat;
             this.minLng = minLng;
+            this.algorithm = algorithm;
         }
         public void SetPoblacionBuilder(PoblacionBuilder p)
         {
@@ -22,14 +25,9 @@ namespace GeneticLibrary
         {
             return PoblacionBuilder.GetPoblacion();
         }
-        /// <summary>
-        /// el creador del patron builder
-        /// llama a los metodos la clase abstracta PoblacionBuilder
-        /// para crear una nueva poblacion
-        /// </summary>
         public void CrearPoblacion()
         {
-            PoblacionBuilder.CrearNuevaPoblacion( minLat,  minLng,  maxLat,  maxLng);
+            PoblacionBuilder.CrearNuevaPoblacion( minLat,  minLng,  maxLat,  maxLng, algorithm);
             PoblacionBuilder.CrearCalculadorFitness();
             PoblacionBuilder.CrearEstrategiaSeleccion();
         }
