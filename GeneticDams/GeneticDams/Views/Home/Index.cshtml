@@ -33,14 +33,14 @@
             @{
                         <div id="dataMap_1" class="d-none">
                             <p><b>Map data <i class="fas fa-layer-group mt-3"></i></b></p>
-                            <p>@mapIterator.First().getInformation()</p>
+                            <pre class="text-muted">@mapIterator.First().getInformation()</pre>
                             <p><b>Min height:</b> @mapIterator.First().MinHeight()<i class="fas fa-long-arrow-alt-down text-danger ml-2"></i></p>
                             <p><b>Max height:</b> @mapIterator.First().MaxHeight()<i class="fas fa-long-arrow-alt-up text-success ml-2"></i></p>
                         </div>
                 @while (maps.Count +1> j)
                 {
                     <div id="dataMap_@j" class="d-none">
-                        <p><b>Map data <i class="fas fa-layer-group mt-3"></i></b></p>
+                        <pre class="text-muted"><b>Map data <i class="fas fa-layer-group mt-3"></i></b></pre>
                         <p>@mapIterator.Next().getInformation()</p>
                         <p><b>Min height:</b> @mapIterator.CurrentItem.MinHeight()<i class="fas fa-long-arrow-alt-down text-danger ml-2"></i></p>
                         <p><b>Max height:</b> @mapIterator.CurrentItem.MaxHeight()<i class="fas fa-long-arrow-alt-up text-success ml-2"></i></p>
@@ -273,6 +273,7 @@
         var _locations;
         var markers = [];
         connection.on("ReceiveMessage", function (locations, message) {
+             clearMarkers();
             _locations = locations;
             var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             document.getElementById("result").value = message;
@@ -287,13 +288,18 @@
                 i++;
 
             }
-
         });
+
         function initMarkers(quantity) {
             for (var i = 0; i < quantity; i++) {
                 markers[i] = placeMarker(null, allIcons, "good")
             }
 
+        }
+        function clearMarkers() {
+            for (var i = 0; i < markers.length; i++) {
+                  markers[i].setMap(null);
+            }
         }
         function mainMarkerTimeout(i) {
             console.log("Principal" + _locations[i][0])
@@ -311,7 +317,7 @@
         });
 
 
-        // Send data to the server
+    // Send data to the server
     document.getElementById("sendButton").addEventListener("click", function (event) {
 
             var selection = document.getElementById("algorithmSelector");

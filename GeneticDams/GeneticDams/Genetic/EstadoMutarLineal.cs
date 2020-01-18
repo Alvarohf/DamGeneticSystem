@@ -7,7 +7,10 @@ namespace GeneticLibrary
         private readonly double minLng;
         private readonly double maxLat;
         private readonly double maxLng;
-
+        /// <summary>
+        /// modifica de manera aleatoria los genes del dna dentro de un margen
+        /// </summary>
+        /// <param name="dna"></param>
         public EstadoMutarLineal(double minLat, double minLng, double maxLat, double maxLng)
         {
             this.minLat = minLat;

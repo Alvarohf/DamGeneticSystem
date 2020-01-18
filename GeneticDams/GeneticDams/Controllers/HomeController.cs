@@ -12,7 +12,7 @@ namespace GeneticDams.Controllers
     public class HomeController : Controller
     {
         // Proxy for the downloads
-        private static readonly DownloadProxy Proxy = new DownloadProxy(new DownloadServer());
+        private static readonly IDownload Proxy = new DownloadProxy(new DownloadServer());
 
         /// <summary>
         /// Return the main view
@@ -55,8 +55,6 @@ namespace GeneticDams.Controllers
             FileContentResult file = Proxy.DownloadFile(filePath, login);
             if (file != null)
             {
-                int a = Proxy.Count();
-                System.Diagnostics.Debug.WriteLine(a);
                 return file;
             } else
             {

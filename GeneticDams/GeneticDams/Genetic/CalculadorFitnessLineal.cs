@@ -8,7 +8,13 @@ using System.Collections.Generic;
 namespace GeneticLibrary
 {
     public class CalculadorFitnessLineal : ICalculadorFitness
-    {
+    {   
+        /// <summary>
+        /// calcula la fitness de un individuo mirando cual es la altura 
+        /// del punto en el que esta el individuo
+        /// </summary>
+        /// <param name="dna"></param>
+        /// <returns></returns>
         public double[] CalcularFitness(List<DNA> dna)
         {
             Location[] locations = new Location[dna.Count];

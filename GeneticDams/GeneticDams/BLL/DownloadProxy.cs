@@ -33,7 +33,11 @@ namespace GeneticDams.BLL
             {
                 // Check if file has a good name
                 if (fileName != "" || fileName != null)
+                {
+                    Count();
+                    System.Diagnostics.Debug.WriteLine(countDownloads);
                     return Server.DownloadFile(fileName, true);
+                }
                 else
                     return null;
             } else

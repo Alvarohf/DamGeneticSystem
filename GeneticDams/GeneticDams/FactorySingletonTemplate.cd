@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="GeneticDams.BLL.SingleFactoryMap">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <AssociationLine Name="_instance" Type="GeneticDams.BLL.SingleFactoryMap" ManuallyRouted="true">
+      <Path>
+        <Point X="11.782" Y="2.882" />
+        <Point X="11.782" Y="3.267" />
+        <Point X="12.228" Y="3.267" />
+        <Point X="12.228" Y="2.882" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABAEAAAAAAAABAAAAAAAAAAABAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>BLL\FactoryMap.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_instance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GeneticDams.BLL.Map">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAMAkAAAAAAAAAAAAAABAAAAACAAAAAAAAAAEAA=</HashCode>
+      <FileName>BLL\FactoryMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeneticDams.BLL.MapMeters">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="GeneticDams.BLL.Map" ManuallyRouted="true">
+      <Path>
+        <Point X="8" Y="3.401" />
+        <Point X="8" Y="3.639" />
+        <Point X="6.5" Y="3.639" />
+        <Point X="6.5" Y="3.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAkAAAAAAAAAAAAAAAAAACACAAEAAAAAAAEAA=</HashCode>
+      <FileName>BLL\FactoryMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeneticDams.BLL.MapFeets">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="GeneticDams.BLL.Map" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="3.401" />
+        <Point X="8" Y="3.639" />
+        <Point X="9.5" Y="3.639" />
+        <Point X="9.5" Y="3.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAkAAAAAAAAAAAAAAAAAACACAAEAAAAAAAEAA=</HashCode>
+      <FileName>BLL\FactoryMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

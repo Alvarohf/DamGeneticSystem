@@ -50,13 +50,13 @@ namespace GeneticDams.BLL
             for (int i = 0; i < num; i++)
             {
                 Locations[i] = new Location[20];
-                oneLocation = p.Simulacion(1);
+                oneLocation = p.Simulacion();
                 // Get the data of each iteration to display it
                 for (int j = 0; j < oneLocation.Length-1; j++) {
                     Locations[i][j] = oneLocation[j];
                         }
                 // Best result of all
-                Result = "Finished. Best point: "+"Lat: "+Locations[i][0].Latitude+"Lng: "+ Locations[i][0].Longitude;
+                Result = "Finished. Best point: "+"Lat: "+Locations[i][0].Latitude+" Lng: "+ Locations[i][0].Longitude;
             }
 
         }
@@ -69,6 +69,8 @@ namespace SignalRChat.Hubs
         /// </summary>
         public class ChatHub : Hub
         {
+
+            private GeneticAlgorithm genetic;
             /// <summary>
             /// Method to send an receive message using a Hub
             /// </summary>
@@ -81,7 +83,7 @@ namespace SignalRChat.Hubs
                 // Parse bounds from string to list of double
                 List<double> limites = message.Replace("(", "").Replace(")", "").Split(",").Select((coord) => double.Parse(coord, CultureInfo.InvariantCulture)).ToList();
                 // Call the genetic library
-                GeneticAlgorithm genetic = new GeneticAlgorithm(limites,typeAlgorithm, typeStrategy);
+                genetic = new GeneticAlgorithm(limites,typeAlgorithm, typeStrategy);
                 // Send answer to clients
                 await Clients.All.SendAsync("ReceiveMessage",
                       genetic.Locations, genetic.Result);
